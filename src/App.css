@@ -16,3 +16,7 @@ margin: 10px;
     align-items: center;
     justify-content: center;
 }
+.heading{
+    color:green;
+    text-transform: uppercase;
+}
