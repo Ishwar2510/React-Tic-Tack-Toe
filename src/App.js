@@ -8,7 +8,7 @@ import Icon from './Icon';
 const itemArray=new Array(9).fill('empty');
 function App() {
   const [isCross,setCross]=useState(false);
-  const [winMsg,setWiner]=useState(0);
+  const [winMsg,setWiner]=useState("");
   function changeItem(itemNumber){
      
     if(winMsg){
@@ -20,8 +20,39 @@ function App() {
     }else{
       return toast("already set",{type:'error'});
     }
+    // setTimeout(()=>{;},5000)
+    checkIsWinner();
+    
+
+    
 
   }
+
+  const checkIsWinner=()=>{
+    if(itemArray[0]!="empty"&&  itemArray[0]==itemArray[1]&& itemArray[0]==itemArray[2]){
+      setWiner(`${itemArray[0]} won`);
+
+    }
+    else if (itemArray[3]!="empty"&&  itemArray[3]==itemArray[4]&& itemArray[3]==itemArray[5]){
+      setWiner(`${itemArray[3]} won`);
+    }else if(itemArray[6]!="empty"&&  itemArray[6]==itemArray[7]&& itemArray[6]==itemArray[8]){
+      setWiner(`${itemArray[6]} won`);
+    }else if(itemArray[0]!="empty"&&  itemArray[0]==itemArray[3]&& itemArray[0]==itemArray[6]){
+      setWiner(`${itemArray[0]} won`);
+    }else if(itemArray[1]!="empty"&&  itemArray[1]==itemArray[4]&& itemArray[1]==itemArray[7]){
+      setWiner(`${itemArray[1]} won`);
+    }else if(itemArray[2]!="empty"&&  itemArray[2]==itemArray[5]&& itemArray[2]==itemArray[8]){
+      setWiner(`${itemArray[2]} won`);
+    }else if(itemArray[0]!="empty"&&  itemArray[0]==itemArray[4]&& itemArray[0]==itemArray[8]){
+      setWiner(`${itemArray[0]} won`);
+    }else if(itemArray[2]!="empty"&&  itemArray[2]==itemArray[4]&& itemArray[2]==itemArray[6]){
+      setWiner(`${itemArray[2]} won`);
+    }
+
+  }
+
+
+
   const reloadGame=()=>{
     setCross(false);
     setWiner("");
@@ -33,16 +64,17 @@ function App() {
     <>
     <Container>
     <ToastContainer position='bottom-center'/>
-      {winMsg
+      {(winMsg)
       ?(
         <div>
-          <h1 className='heading'>  {winMsg} </h1>
-        <Button  color='success' onClick={reloadGame()}> Reset </Button>
+          <h1 >  {winMsg} </h1>
+        <Button  color='success' onClick={reloadGame}> Reset </Button>
         </div>
       )
       : (
         <div>
          <h1 className='heading'> {isCross ? ("cross") : ("circle")  }     turns</h1>
+         <h2> {winMsg}</h2>
         </div>
       )
       }
